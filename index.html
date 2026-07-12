@@ -166,6 +166,10 @@
       background: rgba(255,255,255,0.04);
     }
     .icon-box img { width: 24px; height: 24px; }
+
+    .icon-box img[alt="Oracle Apex"] {
+    filter: invert(40%) sepia(80%) saturate(500%) hue-rotate(220deg) brightness(120%);
+    }
     .icon-label { font-size: 0.8rem; color: var(--muted); text-align: center; font-weight: 500; }
 
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.4rem; }
@@ -459,7 +463,7 @@
     <div class="contact-links">
       <a href="mailto:habzasaleem4774@gmail.com" class="contact-link">✉️ Email Me</a>
       <a href="https://www.linkedin.com/in/habza-saleem" target="_blank" class="contact-link">💼 LinkedIn</a>
-      <a href="https://github.com/habzasaleem" target="_blank" class="contact-link">🐙 GitHub</a>
+      
     </div>
   </div>
 </section>
@@ -491,10 +495,9 @@
     { label: "JavaScript", slug: "javascript",  color: "a78bfa" },
     { label: "PHP",        slug: "php",         color: "6c63ff" },
     { label: "HTML5",      slug: "html5",       color: "a78bfa" },
-    { label: "CSS3",       slug: "css3",        color: "6c63ff" },
+    { label: "CSS3",       slug: "css",        color: "6c63ff" },
     { label: "Laravel",    slug: "laravel",     color: "a78bfa" },
     { label: "WordPress",  slug: "wordpress",   color: "6c63ff" },
-    { label: "MySQL",      slug: "mysql",       color: "a78bfa" },
     { label: "Oracle Apex",slug: "oracle",      color: "6c63ff" },
     { label: "Figma",      slug: "figma",       color: "a78bfa" },
     { label: "Git",        slug: "git",         color: "6c63ff" },
@@ -557,21 +560,21 @@
       name: "Google UX Design Professional Certificate",
       issuer: "Google via Coursera · Nov 2025",
       type: "link",
-      value: "", // TODO: paste your Coursera certificate URL here
+      value: "https://www.coursera.org/account/accomplishments/professional-cert/138S9OY5BUZP", // TODO: paste your Coursera certificate URL here
     },
     {
       icon: "⚡",
       name: "Frontend Development Using AI",
       issuer: "Webdev Masters Pvt Ltd · Jan 2026",
       type: "image",
-      value: "", // TODO: paste an image path or data URL of your certificate here
+      value: "https://habzasaleem.github.io/cert-frontend-ai.png",
     },
     {
       icon: "📊",
       name: "Foundations: Data, Data, Everywhere",
       issuer: "Google via Coursera · Mar 2026",
       type: "link",
-      value: "", // TODO: paste your Coursera certificate URL here
+      value: "https://www.coursera.org/account/accomplishments/verify/EPA4V09OF58C", // TODO: paste your Coursera certificate URL here
     },
   ];
 
@@ -579,14 +582,21 @@
      RENDERING — you shouldn't need to edit below this line
      ============================================================ */
 
+
+
   function renderIconGrid() {
     const el = document.getElementById("iconGrid");
-    el.innerHTML = SKILLS_ICON_DATA.map(s => `
-      <div class="icon-item">
-        <div class="icon-box"><img src="https://cdn.simpleicons.org/${s.slug}/${s.color}" alt="${s.label}" loading="lazy"/></div>
-        <div class="icon-label">${s.label}</div>
-      </div>
-    `).join("");
+    el.innerHTML = SKILLS_ICON_DATA.map(s => {
+      const imgSrc = s.slug === "oracle" 
+        ? "https://cdn.worldvectorlogo.com/logos/oracle-6.svg"
+        : `https://cdn.simpleicons.org/${s.slug}/${s.color}`;
+      return `
+        <div class="icon-item">
+          <div class="icon-box"><img src="${imgSrc}" alt="${s.label}" loading="lazy"/></div>
+          <div class="icon-label">${s.label}</div>
+        </div>
+      `;
+    }).join("");
   }
 
   function renderConceptGrid() {
